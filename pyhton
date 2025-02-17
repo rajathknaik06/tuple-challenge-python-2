@@ -1,0 +1,50 @@
+""" James is an engineer working on designing a new rocket propulsion system. He needs to solve a quadratic equation to determine the optimal launch trajectory. The equation is of the form ax2 +bx+c=0. 
+
+
+
+Your task is to help James find the roots of this quadratic equation. Depending on the discriminant, the roots might be real and distinct, real and equal, or complex. Implement a program to determine and display the roots of the equation based on the given coefficients.
+
+Input format :
+The first line of input consists of an integer N, representing the number of coefficients.
+
+The second line contains three space-separated integers a,b, and c representing the coefficients of the quadratic equation.
+
+Output format :
+The output displays:
+
+If the discriminant is positive, display the two real roots.
+If the discriminant is zero, display the repeated real root.
+If the discriminant is negative, display the complex roots as a tuple with real and imaginary parts."""
+
+# Read the size of the tuple (this will be 3 for the quadratic equation case)
+tuple_size = int(input().strip())
+
+# Read the coefficients as a tuple
+coefficients = tuple(map(int, input().split()))
+
+# Unpack the tuple into a, b, and c
+a, b, c = coefficients
+
+# Calculate the discriminant
+discriminant = b * b - 4 * a * c
+
+# Determine the roots
+if discriminant > 0:
+    # Compute square root approximation without using functions
+    sqrt_discriminant = discriminant ** 0.5
+    root1 = (-b + sqrt_discriminant) / (2 * a)
+    root2 = (-b - sqrt_discriminant) / (2 * a)
+    roots = (root1, root2)
+elif discriminant == 0:
+    root = -b / (2 * a)
+    roots = (root, root)
+else:
+    # Calculate the square root approximation for negative discriminant
+    temp = -discriminant
+    sqrt_temp = temp ** 0.5
+    realPart = -b / (2 * a)
+    imaginaryPart = sqrt_temp / (2 * a)
+    roots = ((realPart, imaginaryPart), (realPart, -imaginaryPart))
+
+# Output
+print(roots)
